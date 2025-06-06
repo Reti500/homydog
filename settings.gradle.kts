@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "homydog"
 include(":app")
+include(":core:di")
