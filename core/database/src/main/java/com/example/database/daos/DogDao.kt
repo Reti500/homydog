@@ -13,7 +13,7 @@ interface DogDao {
     suspend fun insertDogs(dogs: List<DogEntity>)
 
     @Query("SELECT * FROM dogs")
-    fun getAllDogs(): Flow<List<DogEntity>>
+    suspend fun getAllDogs(): List<DogEntity>
 
     @Query("DELETE FROM dogs")
     suspend fun clearAll()

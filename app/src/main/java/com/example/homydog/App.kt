@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.database.di.DatabaseModule
 import com.example.di.AppContainer
 import com.example.di.Module
+import com.example.dogs.di.DogsModule
 import com.example.network.di.NetworkModule
 
 class App : Application() {
@@ -18,7 +19,8 @@ class App : Application() {
     private fun setupDI() {
         val modules = listOf<Module>(
             DatabaseModule(this),
-            NetworkModule()
+            NetworkModule(),
+            DogsModule()
         )
 
         modules.forEach { module ->
