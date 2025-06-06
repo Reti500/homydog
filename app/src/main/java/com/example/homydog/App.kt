@@ -1,8 +1,10 @@
 package com.example.homydog
 
 import android.app.Application
+import com.example.database.di.DatabaseModule
 import com.example.di.AppContainer
 import com.example.di.Module
+import com.example.network.di.NetworkModule
 
 class App : Application() {
 
@@ -14,7 +16,10 @@ class App : Application() {
     }
 
     private fun setupDI() {
-        val modules = listOf<Module>()
+        val modules = listOf<Module>(
+            DatabaseModule(this),
+            NetworkModule()
+        )
 
         modules.forEach { module ->
             module.configure(appContainer)

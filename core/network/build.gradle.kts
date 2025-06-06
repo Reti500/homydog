@@ -1,11 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.ksp)
 }
 
 android {
-    namespace = "com.example.database"
+    namespace = "com.example.network"
     compileSdk = 35
 
     defaultConfig {
@@ -31,6 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
@@ -42,12 +44,10 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    // Room
-    implementation(libs.androidx.room.runtime)
-    ksp(libs.androidx.room.compiler)
-
-    // Json
-    implementation(libs.gson)
+    // Retrofit
+    implementation(libs.retrofit.retrofit)
+    implementation(libs.retrofit.gson)
+    implementation(libs.logging.interceptor)
 
     implementation(project(":core:di"))
 }

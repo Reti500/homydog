@@ -58,4 +58,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation(project(":core:di"))
+    implementation(project(":core:database"))
+    implementation(project(":core:network"))
 }

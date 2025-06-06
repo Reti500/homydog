@@ -23,3 +23,4 @@ rootProject.name = "homydog"
 include(":app")
 include(":core:di")
 include(":core:database")
+include(":core:network")
