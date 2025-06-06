@@ -9,7 +9,9 @@ import com.example.network.di.NetworkModule
 
 class App : Application() {
 
-    val appContainer = AppContainer()
+    companion object {
+        val appContainer = AppContainer()
+    }
 
     override fun onCreate() {
         super.onCreate()
