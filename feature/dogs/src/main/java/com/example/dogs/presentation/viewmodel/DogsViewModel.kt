@@ -17,6 +17,10 @@ class DogsViewModel(
     private val _state = MutableStateFlow(DogsUi())
     val state: StateFlow<DogsUi> = _state.asStateFlow()
 
+    init {
+        handleIntent(DogsIntent.LoadDogs)
+    }
+
     fun handleIntent(intent: DogsIntent) {
         when (intent) {
             is DogsIntent.LoadDogs -> loadDogs()

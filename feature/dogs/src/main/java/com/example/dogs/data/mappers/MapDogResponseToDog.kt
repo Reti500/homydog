@@ -9,6 +9,6 @@ object MapDogResponseToDog {
             name = dog.name ?: "",
             description = dog.description ?: "",
             age = dog.age ?: 0,
-            image = dog.image ?: ""
+            imageUrl = dog.image ?: ""
         )
 }

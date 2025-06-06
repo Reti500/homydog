@@ -56,6 +56,7 @@ dependencies {
 
     // Coil
     implementation(libs.coil.compose)
+    implementation(libs.coil.network)
 
     implementation(project(":core:di"))
     implementation(project(":core:database"))

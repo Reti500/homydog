@@ -9,6 +9,6 @@ object MapDogEntityToDog {
             name = dog.name,
             description = dog.description,
             age = dog.age,
-            image = dog.image
+            imageUrl = dog.image
         )
 }
