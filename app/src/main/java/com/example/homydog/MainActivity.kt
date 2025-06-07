@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import com.example.di.ProvideDependenciesContainer
 import com.example.dogs.presentation.DogsScreen
 import com.example.homydog.ui.theme.HomydogTheme
+import com.example.shared.topbar.DefaultTopAppBar
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +20,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             HomydogTheme {
                 ProvideDependenciesContainer(container = App.appContainer) {
-                    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    Scaffold(
+                        modifier = Modifier.fillMaxSize(),
+                        topBar = { DefaultTopAppBar(getString(R.string.dogs_we_love)) }
+                    ) { innerPadding ->
                         DogsScreen(modifier = Modifier.padding(innerPadding))
                     }
                 }

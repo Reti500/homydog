@@ -2,12 +2,14 @@ package com.example.dogs.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.core.Resource
 import com.example.dogs.domain.usecases.GetAllDogsUseCase
 import com.example.dogs.presentation.state.DogsIntent
 import com.example.dogs.presentation.state.DogsUi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class DogsViewModel(
@@ -30,11 +32,19 @@ class DogsViewModel(
     private fun loadDogs() {
         viewModelScope.launch {
             _state.value = _state.value.copy(isLoading = true)
-            getAlDogsUseCase().collect { dogs ->
-                _state.value = _state.value.copy(
-                    isLoading = false,
-                    dogs = dogs
-                )
+            getAlDogsUseCase().collect { dogsState ->
+                when(dogsState) {
+                    Resource.Loading -> _state.update {
+                        it.copy(isLoading = true, error = null)
+                    }
+                    is Resource.Error -> _state.update {
+                        it.copy(isLoading = true, error = dogsState.message)
+                    }
+                    is Resource.Success -> _state.update {
+                        it.copy(isLoading = false, dogs = dogsState.data, error = null)
+                    }
+                }
+
             }
         }
     }

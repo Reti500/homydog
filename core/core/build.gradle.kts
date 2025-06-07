@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.network"
+    namespace = "com.example.core"
     compileSdk = 35
 
     defaultConfig {
@@ -30,9 +30,6 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    buildFeatures {
-        buildConfig = true
-    }
 }
 
 dependencies {
@@ -43,12 +40,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    // Retrofit
-    implementation(libs.retrofit.retrofit)
-    implementation(libs.retrofit.gson)
-    implementation(libs.logging.interceptor)
-
-    implementation(project(":core:core"))
-    implementation(project(":core:di"))
 }

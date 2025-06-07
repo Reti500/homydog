@@ -14,7 +14,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,12 +30,15 @@ import coil3.compose.LocalPlatformContext
 import coil3.request.ImageRequest
 import com.example.dogs.R
 import com.example.dogs.domain.models.Dog
+import com.example.shared.colors.Colors
+import com.example.shared.text.NormalText
+import com.example.shared.text.TitleText
 
 @Composable
 fun DogCard(
     dog: Dog,
+    imageWidth: Int,
     modifier: Modifier = Modifier,
-    imageWidth: Int = 490,
 ) {
     val density = LocalDensity.current
     val imageWidthDp = with(density) { (imageWidth * .8).toInt().toDp() }
@@ -78,26 +80,25 @@ fun DogCard(
                         .padding(top = 16.dp, bottom = 16.dp, end = 16.dp)
                         .align(Alignment.Bottom)
                 ) {
-                    Text(
-                        text = dog.name,
-                        style = MaterialTheme.typography.titleLarge,
+                    Spacer(Modifier.height(8.dp))
+                    TitleText(
+                        title = dog.name,
                         maxLines = 1
                     )
-                    Spacer(Modifier.height(8.dp))
-                    Text(
+                    Spacer(Modifier.height(12.dp))
+                    NormalText(
                         text = dog.description,
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = Color.Gray,
-                        minLines = 3,
-                        maxLines = 3
+                        maxLines = 3,
+                        minLines = 3
                     )
-                    Spacer(Modifier.height(8.dp))
-                    Text(
+                    Spacer(Modifier.height(12.dp))
+                    NormalText(
                         text = stringResource(R.string.dog_old, dog.age),
-                        style = MaterialTheme.typography.bodyMedium,
+                        fontColor = Colors.TitleTextColor,
                         fontWeight = FontWeight.Bold,
                         maxLines = 1
                     )
+                    Spacer(Modifier.height(8.dp))
                 }
             }
         }
@@ -114,7 +115,8 @@ private fun PreviewDogCard() {
                 description = "He is much more passive and is the first to suggest to rescue and not eat The Little Pilot",
                 age = 5,
                 imageUrl = ""
-            )
+            ),
+            imageWidth = 600
         )
     }
 }
@@ -129,7 +131,8 @@ private fun PreviewDogCardShortDescription() {
                 description = "He is a leader of a pack of dogs",
                 age = 5,
                 imageUrl = ""
-            )
+            ),
+            imageWidth = 300
         )
     }
 }
