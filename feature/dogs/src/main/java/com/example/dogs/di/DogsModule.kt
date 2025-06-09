@@ -4,6 +4,7 @@ import com.example.database.daos.DogDao
 import com.example.di.Container
 import com.example.di.Module
 import com.example.dogs.data.repositories.DogsRepositoryImpl
+import com.example.dogs.data.usecases.GetAllDogsUseCaseImpl
 import com.example.dogs.domain.repositories.DogsRepository
 import com.example.dogs.domain.usecases.GetAllDogsUseCase
 import com.example.dogs.presentation.viewmodel.DogsViewModel
@@ -21,7 +22,7 @@ class DogsModule : Module {
 
         // Register GetAllDogsUseCase
         container.register(GetAllDogsUseCase::class.java) {
-            GetAllDogsUseCase(
+            GetAllDogsUseCaseImpl(
                 dogsRepository = container.get(DogsRepository::class.java)
             )
         }

@@ -11,7 +11,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.integerResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.di.inject
 import com.example.dogs.R
@@ -35,8 +35,9 @@ fun DogsScreen(
         LazyColumn {
             items(state.dogs) { dog ->
                 DogCard(
-                    dog,
-                    imageWidth = integerResource(R.integer.dog_img_width_px)
+                    dog = dog,
+                    imageWidth = dimensionResource(R.dimen.dog_img_width),
+                    imageHeight = dimensionResource(R.dimen.dog_img_height)
                 )
             }
         }

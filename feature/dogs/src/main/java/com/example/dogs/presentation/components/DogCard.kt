@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -23,38 +24,35 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import coil3.compose.AsyncImage
-import coil3.compose.LocalPlatformContext
-import coil3.request.ImageRequest
 import com.example.dogs.R
 import com.example.dogs.domain.models.Dog
 import com.example.shared.colors.Colors
+import com.example.shared.images.LocalRemoteImage
 import com.example.shared.text.NormalText
 import com.example.shared.text.TitleText
 
 @Composable
 fun DogCard(
     dog: Dog,
-    imageWidth: Int,
+    imageWidth: Dp,
+    imageHeight: Dp,
     modifier: Modifier = Modifier,
 ) {
     val density = LocalDensity.current
-    val imageWidthDp = with(density) { (imageWidth * .8).toInt().toDp() }
+    val imageWidthDp = with(density) { imageWidth + 16.dp } // 16.dp for margin into image and texts
 
     Box(
         modifier = modifier.padding(16.dp)
     ) {
         // Image at the top
-        AsyncImage(
-            model = ImageRequest.Builder(LocalPlatformContext.current)
-                .data(dog.imageUrl)
-                .size(imageWidth)
-                .build(),
-            contentDescription = null,
+        LocalRemoteImage(
+            imageUrl = dog.imageUrl,
             modifier = Modifier
                 .clip(RoundedCornerShape(16.dp))
+                .size(imageWidth, imageHeight)
                 .zIndex(1f)
         )
 
@@ -114,9 +112,10 @@ private fun PreviewDogCard() {
                 name = "Rex",
                 description = "He is much more passive and is the first to suggest to rescue and not eat The Little Pilot",
                 age = 5,
-                imageUrl = ""
+                imageUrl = "https://static.wikia.nocookie.net/isle-of-dogs/images/6/6b/Spots.jpg/revision/latest/scale-to-width-down/666?cb=20180624191101"
             ),
-            imageWidth = 600
+            imageWidth = 120.dp,
+            imageHeight = 190.dp
         )
     }
 }
@@ -132,7 +131,8 @@ private fun PreviewDogCardShortDescription() {
                 age = 5,
                 imageUrl = ""
             ),
-            imageWidth = 300
+            imageWidth = 150.dp,
+            imageHeight = 240.dp
         )
     }
 }

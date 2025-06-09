@@ -54,10 +54,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    // Coil
-    implementation(libs.coil.compose)
-    implementation(libs.coil.network)
-
     implementation(project(":core:core"))
     implementation(project(":core:di"))
     implementation(project(":core:database"))
