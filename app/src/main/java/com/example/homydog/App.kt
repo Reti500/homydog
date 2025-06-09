@@ -20,8 +20,8 @@ class App : Application() {
 
     private fun setupDI() {
         val modules = listOf<Module>(
-            DatabaseModule(this),
-            NetworkModule(),
+            DatabaseModule(this, BuildConfig.DB_NAME),
+            NetworkModule(BuildConfig.BASE_URL),
             DogsModule()
         )
 

@@ -19,12 +19,18 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "DB_NAME", "\"dogs_db\"")
+            buildConfigField("String", "BASE_URL", "\"https://jsonblob.com/api/\"")
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "DB_NAME", "\"dogs_db\"")
+            buildConfigField("String", "BASE_URL", "\"https://jsonblob.com/api/\"")
         }
     }
     compileOptions {
@@ -36,6 +42,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 

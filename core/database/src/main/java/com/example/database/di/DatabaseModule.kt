@@ -6,10 +6,13 @@ import com.example.database.daos.DogDao
 import com.example.di.Container
 import com.example.di.Module
 
-class DatabaseModule(val context: Context) : Module {
+class DatabaseModule(
+    val context: Context,
+    val dbName: String
+) : Module {
     override fun configure(container: Container) {
         container.register(AppDatabase::class.java) {
-            AppDatabase.getDatabase(context, "dogs_db") // TODO: get name from config or inject of environment
+            AppDatabase.getDatabase(context, dbName)
         }
 
         container.register(DogDao::class.java) {

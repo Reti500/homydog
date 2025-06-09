@@ -2,6 +2,7 @@ package com.example.network.di
 
 import com.example.di.Container
 import com.example.di.Module
+import com.example.network.BuildConfig
 import com.example.network.service.DogsService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -9,16 +10,18 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class NetworkModule : Module {
+class NetworkModule(
+    private val baseUrl: String
+) : Module {
     override fun configure(container: Container) {
         // Register OkHttpClient
         container.register(OkHttpClient::class.java) {
             val loggingInterceptor = HttpLoggingInterceptor().apply {
-                /*level = if (BuildConfig.DEBUG) {
+                level = if (BuildConfig.DEBUG) {
                     HttpLoggingInterceptor.Level.BODY
                 } else {
                     HttpLoggingInterceptor.Level.NONE
-                }*/
+                }
             }
 
             OkHttpClient.Builder()
@@ -32,7 +35,7 @@ class NetworkModule : Module {
         // Register Retrofit
         container.register(Retrofit::class.java) {
             Retrofit.Builder()
-                .baseUrl("https://jsonblob.com/api/") // TODO: get base url from config or inject of environment
+                .baseUrl(baseUrl)
                 .client(container.get(OkHttpClient::class.java))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
